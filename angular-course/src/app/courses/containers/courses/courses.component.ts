@@ -13,6 +13,7 @@ import { ErrorDialogComponent } from '../../../shared/components/error-dialog/er
 import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
 import { CategoryPipe } from '../../../shared/pipes/category.pipe';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -37,13 +38,15 @@ export class CoursesComponent {
 
   //courses: Course[] = [];
 
-  displayedColumns = ['_id','name', 'category'];
+  displayedColumns = ['name', 'category', 'actions'];
 
   //coursesService: CoursesService;
 
   constructor(
     private coursesService: CoursesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     //this.courses = [];
     //this.coursesService = new CoursesService();
@@ -65,4 +68,8 @@ export class CoursesComponent {
   }
 
   ngOnInit(): void {}
+
+  onAdd() {
+    this.router.navigate(['new'], { relativeTo: this.route });
+  }
 }
